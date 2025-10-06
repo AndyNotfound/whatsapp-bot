@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WA API</title>
+  <style>
+    .form { max-width:400px; margin:50px auto; padding:16px; background:#fff; text-align:center; }
+    #qrcode canvas, #qrcode img { width:250px !important; height:250px !important; box-shadow:0 0 10px rgba(0,0,0,.15); }
+  </style>
+</head>
+<body>
+  <div class="form">
+    <h1>WhatsApp API QR</h1>
+    <div id="qrcode">Loading QR…</div>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<script>
+  const socket = io();
+  const qrcodeContainer = document.getElementById('qrcode');
+  let qr = new QRCode(qrcodeContainer, {
+    text: "waiting for server...",
+    width: 250,
+    height: 250,
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  socket.on('qr', (text) => {
+    console.log('QR text received:', text);
+    qrcodeContainer.innerHTML = "";
+    qr = new QRCode(qrcodeContainer, {
+      text: String(text),
+      width: 250,
+      height: 250,
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  });
+
+  socket.on('log', msg => console.log('log:', msg));
+</script>
+</body>
+</html>
