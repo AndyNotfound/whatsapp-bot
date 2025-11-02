@@ -6,6 +6,5 @@ const router = express.Router();
 
 router.post('/send-message', validateSendMessage, whatsappController.sendMessage);
 router.post('/logout', whatsappController.logout);
-router.get('/qr', whatsappController.getQR);
 
 module.exports = router;

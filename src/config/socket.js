@@ -11,10 +11,8 @@ const initializeSocket = (httpServer) => {
     }
   });
 
-  // Set the event emitter for WhatsApp service
   whatsappService.setEventEmitter(io);
 
-  // Initialize WhatsApp connection
   whatsappService.connect();
 
   io.on('connection', (socket) => {
@@ -25,7 +23,10 @@ const initializeSocket = (httpServer) => {
     
     const qrCode = whatsappService.getQRCode();
     if (qrCode) {
+      console.log('Sending existing QR code to new client');
       socket.emit('qr', qrCode);
+    } else if (!status.connected) {
+      console.log('No QR code available, client will wait for new one');
     }
 
     socket.on('disconnect', () => {

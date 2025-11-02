@@ -2,7 +2,7 @@
   "name": "whatsapp-bot",
   "version": "1.0.0",
   "description": "WhatsApp Bot ",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -10,9 +10,14 @@
   },
   "author": "Gohand Silitonga",
   "license": "ISC",
-  "keywords": ["whatsapp", "baileys", "express", "websocket"],
+  "keywords": [
+    "whatsapp",
+    "baileys",
+    "express",
+    "websocket"
+  ],
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.9",
+    "@whiskeysockets/baileys": "^6.6.0",
     "express": "^4.18.2",
     "pino": "^8.16.0",
     "qrcode-terminal": "^0.12.0",

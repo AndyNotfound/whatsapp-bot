@@ -1,12 +1,17 @@
-const express = require('express');
-const routes = require('./routes');
+const express = require("express");
+const path = require("path");
+const routes = require("./routes");
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 
-// Routes
-app.use('/api', routes);
+app.use(express.static(path.join(__dirname, "../client")));
+
+app.use("/api", routes);
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/qr.html"));
+});
 
 module.exports = app;

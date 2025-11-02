@@ -28,16 +28,6 @@ class WhatsAppController {
       });
     }
   }
-
-  getQR(req, res) {
-    const qrCode = whatsappService.getQRCode();
-    
-    if (qrCode) {
-      res.sendFile(path.join(__dirname, '../../client/qr.html'));
-    } else {
-      res.status(404).json({ error: 'No QR code available' });
-    }
-  }
 }
 
 module.exports = new WhatsAppController();
